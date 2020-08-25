@@ -58,14 +58,14 @@ The next step is API authentication, which can be done in one of the two ways ou
 
 #### 1.Authenticate via Client Secret
 
-You can create client secrets by clicking the "Certificates & secrets" link on the left there.  Be sure to copy it somewhere or you’ll have to create a new one … there’s no facility for viewing them later.  The [default config file](./o365beat.yml) expects these config values to be in your environment (i.e., as environment variables) or in a [keystore](https://www.elastic.co/guide/en/beats/filebeat/current/keystore.html), named O365BEAT_TENANT_DOMAIN, O365BEAT_CLIENT_SECRET, etc.  You can hard-code them in that file if you like, especially when testing, just be smart about the permissions.
+You can create client secrets by clicking the "Certificates & secrets" link on the left there.  Be sure to copy it somewhere or you’ll have to create a new one … there’s no facility for viewing them later.  The [default config file](./o365beat.yml) expects these config values to be in your environment (i.e., as environment variables) or in a [keystore](https://www.elastic.co/guide/en/beats/filebeat/current/keystore.html), named O365BEAT_TENANT_DOMAIN, O365BEAT_CLIENT_SECRET, etc.  You can hard-code them in that file if you like, especially when testing, just be smart about the permissions. If you choose this method be sure to O365BEAT_CERTIFICATE_PATH and O365BEAT_CERTIFICATE_PWD fields empty.
 
 _________________
 
 #### 2.Authenticate via Certificates
 
 Alternative you can authenticate via certificates, which can be [genrated using openssl, as described here](https://github.com/Azure/go-autorest/tree/master/autorest/adal#register-an-azure-ad-application-with-certificate). Then, you need to upload the certificate(the .crt ), which can be done in the Certificates & secrets tab to the left of the application registration menu.
-![](https://i0.wp.com/laurakokkarinen.com/wp-content/uploads/2019/04/cer-uploaded.png?w=846&ssl=1)
+![](https://i0.wp.com/laurakokkarinen.com/wp-content/uploads/2019/04/cer-uploaded.png?w=846&ssl=1) The [default config file](./o365beat.yml) expects these config values to be in your environment (i.e., as environment variables) or in a [keystore](https://www.elastic.co/guide/en/beats/filebeat/current/keystore.html), named O365BEAT_CERTIFICATE_PATH and O365BEAT_CERTIFICATE_PWD in addition to common fields like O365BEAT_TENANT_DOMAIN. You can hard-code them in that file if you like, especially when testing, just be smart about the permissions. If you choose this method be sure to leave the O365BEAT_CLIENT_SECRET field empty.
 
 _________________
 
@@ -75,9 +75,6 @@ Finally, the Azure app registration permissions should look like this:
 ![App Permissions in Azure Portal](./docs/app-registration-permissions.jpg)
 
 You can edit those using that “API permissions” link on the left, with [more detailed instructions available from Microsoft](https://docs.microsoft.com/en-us/office/office-365-management-api/get-started-with-office-365-management-apis#specify-the-permissions-your-app-requires-to-access-the-office-365-management-apis).  The beat should automatically subscribe you to the right feeds, though that functionality is currently undergoing testing.
-
-
-
 
 
 ### Run
